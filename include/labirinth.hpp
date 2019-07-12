@@ -20,6 +20,8 @@ public:
 
 	std::vector<Segment> getBarriers() const;
 
+	bool victory(const Point playerPosition) const;
+
 private:
 
 	int _vSize;

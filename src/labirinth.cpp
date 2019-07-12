@@ -11,7 +11,7 @@
 namespace 
 {
 	// This represents the size of the labirinth's squared grid
-	const int STEP = 50;
+	const int STEP = 40;
 }
 
 Labirinth::Labirinth()
@@ -45,6 +45,8 @@ std::vector<Segment> Labirinth::getBarriers() const
 
 void Labirinth::generateLabirinth()
 {
+	this->_barriers.clear();
+
 	for(int i = 0; i <= _hSize; i++)
 	{
 		for(int j = 0; j <= _vSize; j++)
@@ -149,4 +151,10 @@ const int Labirinth::getSquareY(const int id)
 const bool Labirinth::validatePosition(const int x, const int y)
 {
 	return x >= 0 and y >= 0 and x < _hSize and y < _vSize;
+}
+
+bool Labirinth::victory(const Point position) const
+{
+	return	position.getX() - globals::SCREEN_WIDTH + STEP > 0 and
+					position.getY() - globals::SCREEN_HEIGHT + STEP > 0;
 }

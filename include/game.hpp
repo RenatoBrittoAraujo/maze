@@ -46,7 +46,6 @@ public:
 	 */
 	void run();
 
-
 	// Setters and Getters
 
 	void setVerbose(bool verbose);
@@ -54,9 +53,11 @@ public:
 
 private:
 
+	void startGame();
+
 	/*
 		Hanles user input as SDL's events
-	 */
+	*/
 	void handleUserInput();
 
 	/*

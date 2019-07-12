@@ -4,6 +4,7 @@
 #include "ball.hpp"
 #include "input.hpp"
 #include "labirinth.hpp"
+#include "globals.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -38,10 +39,11 @@ bool Game::init(const char *title)
 
 	_graphics->loadImage("assets/circle.png");
 
-	_player = new Ball(*this->_graphics, 4, 4);
+	_player = new Ball(*this->_graphics);
 
 	_labirinth = new Labirinth();
-	_labirinth->generateLabirinth();
+
+	startGame();
 
 	/* End of class initialization */
 
@@ -107,6 +109,11 @@ void Game::update()
 
 	this->handleCollisions();
 	this->_player->update();
+	
+	if (this->_labirinth->victory(this->_player->getPosition()))
+	{
+		startGame();
+	}
 
 	/* End of updating */
 }
@@ -174,10 +181,12 @@ void Game::setVerbose(bool verbose)
 
 void Game::handleCollisions()
 {
-	float x = _player->getX();
-	float y = _player->getY();
 	auto barriers = this->_labirinth->getBarriers();
 	this->_player->collisionCheck(barriers);
-	if(_player->getX() != x or _player->getY() != y)
-		std::cout << "COLLISION DETECTED AT " << SDL_GetTicks() << std::endl;
+}
+
+void Game::startGame()
+{
+	this->_player->setPosition(globals::SPAWN_POINT);
+	this->_labirinth->generateLabirinth();
 }

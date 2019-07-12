@@ -3,6 +3,7 @@
 
 #include "sprite.hpp"
 #include "segment.hpp"
+#include "point.hpp"
 
 #include <vector>
 
@@ -13,7 +14,7 @@ public:
 	Ball();
 	~Ball();
 
-	Ball(Graphics &graphics, float x, float y);
+	Ball(Graphics &graphics);
 
 	void moveLeft();
 	void moveRight();
@@ -26,6 +27,11 @@ public:
 
 	float getX() { return this->_x; }
 	float getY() { return this->_y; }
+
+	void setPosition(const Point position) { 
+		this->_x = position.getX(); this->_y = position.getY(); }
+
+	Point getPosition() const;
 
 private:
 

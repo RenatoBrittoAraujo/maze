@@ -17,8 +17,7 @@ Ball::Ball()
 Ball::~Ball()
 {}
 
-Ball::Ball(Graphics &graphics, float x, float y) :
-	_x(x), _y(y)
+Ball::Ball(Graphics &graphics)
 {
 	this->_sprite = new Sprite(graphics, "assets/circle.png", 0, 0, 112, 112);
 	this->_diameter = floor(Util::applyScale(float(112)));
@@ -64,6 +63,11 @@ void Ball::collisionCheck(std::vector<Segment> barriers)
 	}
 }
 
+Point Ball::getPosition() const
+{
+	return Point(this->_x, this->_y);
+}
+
 void Ball::handleBorderCollision()
 {
 	if (_x < 0)
@@ -76,15 +80,9 @@ void Ball::handleBorderCollision()
 		_y = globals::SCREEN_HEIGHT - _diameter;
 }
 
-// Credits for most of the following competitive programming repo (in brazilian portuguese):
+// Credits for the code:
 // https://github.com/edsomjr/TEP/blob/master/Geometria_Computacional/slides/CC-2/CC-2.pdf
 // Valeu Edson!
-
-// This routine finds the 2 intersection points from the line defined by segment
-// and the circle defined by ball.
-// Then checks if those two points are inside the segment (otherwise there is no collision)
-// and creates a vector going the opposite direction from the collision center
-// and updates the _x and _y of ball based on that vector
 void Ball::handleSegmentCollision(Segment segment)
 {
 	const float fx = segment.getFirst().getX();
@@ -104,11 +102,11 @@ void Ball::handleSegmentCollision(Segment segment)
 		{
 			if(segx - (x - radius) > x + radius - segx)
 			{
-				x = segx - radius;
+				x = segx - radius - 1;
 			}
 			else
 			{
-				x = segx + radius;
+				x = segx + radius + 1;
 			}
 		}	
 	} 
@@ -116,15 +114,15 @@ void Ball::handleSegmentCollision(Segment segment)
 	{
 		float segy = fy;
 		if (segy >= y - radius and segy <= y + radius and
-				std::min(fx, sx) < x + radius and std::max(fx, sx) > _x - radius)
+				std::min(fx, sx) < x + radius and std::max(fx, sx) > x - radius)
 		{
 			if (segy - (y - radius) > y + radius - segy)
 			{
-				y = segy - radius;
+				y = segy - radius - 1;
 			}
 			else
 			{
-				y = segy + radius;
+				y = segy + radius + 1;
 			}
 		}
 	}
