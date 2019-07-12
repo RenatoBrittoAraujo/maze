@@ -24,6 +24,10 @@ public:
 
 	 */
 	static const bool fequals(float a, float b);
+
+	static const int applyScale(int a);
+
+	static const float applyScale(float a);
 };
 
 #endif

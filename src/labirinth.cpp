@@ -9,7 +9,6 @@
 namespace 
 {
 	// This represents the size of the labirinth's squared grid
-	// should be divisible by both the screen width and screen height
 	const int STEP = 50;
 }
 

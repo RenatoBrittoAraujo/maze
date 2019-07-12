@@ -2,10 +2,13 @@
 #include "graphics.hpp"
 #include "sprite.hpp"
 #include "globals.hpp"
+#include "util.hpp"
+
+#include <algorithm>
 
 namespace 
 {
-	const double ballSpeed = 5.0; 
+	const float ballSpeed = 5.0; 
 }
 
 Ball::Ball()
@@ -18,7 +21,7 @@ Ball::Ball(Graphics &graphics, float x, float y) :
 	_x(x), _y(y)
 {
 	this->_sprite = new Sprite(graphics, "assets/circle.png", 0, 0, 112, 112);
-	this->_radius = (float(112) / 2.0f) * globals::SCALE;
+	this->_diameter = floor(Util::applyScale(float(112)));
 }
 
 void Ball::draw(Graphics &graphics)
@@ -51,12 +54,10 @@ void Ball::moveRight()
 	this->_x += ballSpeed;
 }
 
-#include <iostream>
-
 void Ball::collisionCheck(std::vector<Segment> barriers)
 {
 	this->handleBorderCollision();
-	for(auto segment : barriers)
+	for (auto segment : barriers)
 	{
 
 		this->handleSegmentCollision(segment);
@@ -65,14 +66,14 @@ void Ball::collisionCheck(std::vector<Segment> barriers)
 
 void Ball::handleBorderCollision()
 {
-	if(_x < 0)
+	if (_x < 0)
 		_x = 0;
-	if(_x + (int)((double)112 * globals::SCALE) > globals::SCREEN_WIDTH)
-		_x = globals::SCREEN_WIDTH - (int)((double)112 * globals::SCALE);
+	if (_x + _diameter > globals::SCREEN_WIDTH)
+		_x = globals::SCREEN_WIDTH - _diameter;
 	if (_y < 0)
 		_y = 0;
-	if (_y + (int)((double)112 * globals::SCALE) > globals::SCREEN_HEIGHT)
-		_y = globals::SCREEN_HEIGHT - (int)((double)112 * globals::SCALE);
+	if (_y + _diameter > globals::SCREEN_HEIGHT)
+		_y = globals::SCREEN_HEIGHT - _diameter;
 }
 
 // Credits for most of the following competitive programming repo (in brazilian portuguese):
@@ -86,6 +87,74 @@ void Ball::handleBorderCollision()
 // and updates the _x and _y of ball based on that vector
 void Ball::handleSegmentCollision(Segment segment)
 {
+	const float fx = segment.getFirst().getX();
+	const float fy = segment.getFirst().getY();
+	const float sx = segment.getSecond().getX();
+	const float sy = segment.getSecond().getY();
+
+	float x = _x + _diameter / 2.0f;
+	float y = _y + _diameter / 2.0f;
+	float radius = _diameter / 2.0f;
+
+	if (Util::fequals(fx, sx))
+	{
+		float segx = fx;
+		if (segx >= x - radius and segx <= x + radius and
+				std::min(fy, sy) < y + radius and std::max(fy, sy) > y - radius)
+		{
+			if(segx - (x - radius) > x + radius - segx)
+			{
+				x = segx - radius;
+			}
+			else
+			{
+				x = segx + radius;
+			}
+		}	
+	} 
+	else 
+	{
+		float segy = fy;
+		if (segy >= y - radius and segy <= y + radius and
+				std::min(fx, sx) < x + radius and std::max(fx, sx) > _x - radius)
+		{
+			if (segy - (y - radius) > y + radius - segy)
+			{
+				y = segy - radius;
+			}
+			else
+			{
+				y = segy + radius;
+			}
+		}
+	}
+
+	_x = x - radius;
+	_y = y - radius;
+
+	/*
+	Point center(_x, _y);
+	float distFirst = segment.getFirst().euclidianDistance(center);
+	float distSecond = segment.getSecond().euclidianDistance(center);
+
+	if (distFirst < _radius)
+	{
+		Point vector(fx - _x, fy - _y);
+		vector = vector * (- (_radius - distFirst) / distFirst);
+		_x += vector.getX();
+		_y += vector.getY();
+	}
+
+	if (distSecond < _radius)
+	{
+		Point vector(fx - _x, fy - _y);
+		vector = vector * (-(_radius - distSecond) / distSecond);
+		_x += vector.getX();
+		_y += vector.getY();
+	}
+ 	*/
+
+	/*
 	Point P = segment.getFirst();
 	Point Q = segment.getSecond();
 	
@@ -136,4 +205,5 @@ void Ball::handleSegmentCollision(Segment segment)
 
 	this->_x += vector.getX();
 	this->_y += vector.getY();
+	*/
 }

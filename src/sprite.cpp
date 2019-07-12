@@ -1,6 +1,7 @@
 #include "sprite.hpp"
 #include "globals.hpp"
 #include "graphics.hpp"
+#include "util.hpp"
 
 #include <iostream>
 #include <algorithm>
@@ -27,7 +28,7 @@ Sprite::Sprite(Graphics &graphics, const std::string &path, int sourceX, int sou
 
 void Sprite::draw(Graphics &graphics, int x, int y)
 {
-	SDL_Rect destination = {x, y, (int)((float)this->_sourceRect.w * globals::SCALE), (int)((float)this->_sourceRect.h * globals::SCALE)};
+	SDL_Rect destination = { x, y, Util::applyScale(this->_sourceRect.w), Util::applyScale(this->_sourceRect.h) };
 	graphics.blitSurface(this->_spriteSheet, &this->_sourceRect, &destination);
 }
 

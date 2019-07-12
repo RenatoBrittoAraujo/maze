@@ -17,6 +17,12 @@ public:
 
 	float euclidianDistance(Point &other);
 
+	Point operator * (float value)
+	{
+		_x *= value;
+		_y *= value;
+	}
+
 private:
 
 	float _x, _y;

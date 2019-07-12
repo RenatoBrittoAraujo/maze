@@ -38,7 +38,7 @@ bool Game::init(const char *title)
 
 	_graphics->loadImage("assets/circle.png");
 
-	_player = new Ball(*this->_graphics, 100, 100);
+	_player = new Ball(*this->_graphics, 4, 4);
 
 	_labirinth = new Labirinth();
 
@@ -119,7 +119,6 @@ void Game::render()
 
 	_graphics->setRenderColor(_segmentColor);
 	_labirinth->draw(*this->_graphics);
-
 	_player->draw(*this->_graphics);
 
 	/* End of rendering */
@@ -174,6 +173,10 @@ void Game::setVerbose(bool verbose)
 
 void Game::handleCollisions()
 {
+	float x = _player->getX();
+	float y = _player->getY();
 	auto barriers = this->_labirinth->getBarriers();
 	this->_player->collisionCheck(barriers);
+	if(_player->getX() != x or _player->getY() != y)
+		std::cout << "YO WTF POSITION CHANGED FROM " << x << ' ' << y << " TO " << _player->getX() << ' ' << _player->getY() << std::endl;
 }

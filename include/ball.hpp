@@ -24,11 +24,14 @@ public:
 	void update();
 	void collisionCheck(std::vector<Segment> segments);
 
+	float getX() { return this->_x; }
+	float getY() { return this->_y; }
+
 private:
 
 	Sprite *_sprite;
 	float _x, _y;
-	float _radius;
+	float _diameter;
 
 	void handleBorderCollision();
 	void handleSegmentCollision(Segment segment);

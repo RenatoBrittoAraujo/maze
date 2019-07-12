@@ -15,7 +15,7 @@ public:
 	Sprite();
 	~Sprite();
 
-	Sprite(Graphics &graphics, const std::string &path, int sourceX, int sourceY, int width, int height);
+	Sprite(Graphics &graphics, const std::string &path, int sourceX, int sourceY, int sourceWidth, int sourceHeight);
 
 	void update();
 	void draw(Graphics &graphics, int x, int y);
@@ -26,6 +26,8 @@ protected:
 	SDL_Texture *_spriteSheet;
 
 private:
+
+
 };
 
 #endif

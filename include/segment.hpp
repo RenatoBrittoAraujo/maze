@@ -16,8 +16,8 @@ public:
 	void draw(Graphics &graphics);
 	void update();
 
-	const Point getFirst() { return this->_first; }
-	const Point getSecond() { return this->_second; }
+	Point getFirst() { return this->_first; }
+	Point getSecond() { return this->_second; }
 
 private:
 
