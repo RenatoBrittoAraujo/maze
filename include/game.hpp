@@ -86,8 +86,8 @@ private:
 
 	SDL_Event _event;
 
-	Color _segmentColor = Color(0, 0, 0, 255);
-	Color _backgroundColor = Color(240, 240, 240, 255);
+	Color _segmentColor = Color(140, 140, 140, 255);
+	Color _backgroundColor = Color(200, 200, 230, 255);
 
 };
 

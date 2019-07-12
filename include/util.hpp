@@ -2,6 +2,7 @@
 #define UTIL_HPP
 
 #include <string>
+#include <vector>
 
 class Util
 {
@@ -11,7 +12,7 @@ public:
 		Returns an integer int the interval [lower,upper]
 		Throws exception if lower > upper
 	 */
-	static int randInt(int lower, int upper);
+	static const int randInt(int lower, int upper);
 
 	/*
 		Returns true if any file was found in path passed
@@ -28,6 +29,9 @@ public:
 	static const int applyScale(int a);
 
 	static const float applyScale(float a);
+
+	template <typename T>
+	static void permute(std::vector<T> &vector);
 };
 
 #endif

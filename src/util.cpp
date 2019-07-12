@@ -5,7 +5,7 @@
 #include <string>
 #include <fstream>
 
-int Util::randInt(int lower, int upper)
+const int Util::randInt(int lower, int upper)
 {
 	if (lower > upper)
 	{
@@ -38,3 +38,14 @@ const float Util::applyScale(float a)
 {
 	return a * globals::SPRITE_SCALE;
 }
+
+template <typename T>
+void Util::permute(std::vector<T> &vector)
+{
+	for(int i = 0; i < vector.size(); i++)
+	{
+		std::swap( vector[i], vector[randInt(0, vector.size() - 1)] );
+	}
+}
+
+template void Util::permute<int>(std::vector<int>&);

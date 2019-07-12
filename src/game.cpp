@@ -30,7 +30,7 @@ bool Game::init(const char *title)
 		Logger::logInfo("SDL Subsystems initialized");
 	}
 
-	_graphics = new Graphics("SDL game");
+	_graphics = new Graphics("Cleber e seu labirinto perdido");
 
 	// Standard background color set to white
 
@@ -41,6 +41,7 @@ bool Game::init(const char *title)
 	_player = new Ball(*this->_graphics, 4, 4);
 
 	_labirinth = new Labirinth();
+	_labirinth->generateLabirinth();
 
 	/* End of class initialization */
 
@@ -178,5 +179,5 @@ void Game::handleCollisions()
 	auto barriers = this->_labirinth->getBarriers();
 	this->_player->collisionCheck(barriers);
 	if(_player->getX() != x or _player->getY() != y)
-		std::cout << "YO WTF POSITION CHANGED FROM " << x << ' ' << y << " TO " << _player->getX() << ' ' << _player->getY() << std::endl;
+		std::cout << "COLLISION DETECTED AT " << SDL_GetTicks() << std::endl;
 }

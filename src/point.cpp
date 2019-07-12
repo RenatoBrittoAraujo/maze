@@ -12,16 +12,6 @@ Point::Point(float x, float y) :
 	_x(x), _y(y)
 {}
 
-float Point::getX()
-{
-	return this->_x;
-}
-
-float Point::getY()
-{
-	return this->_y;
-}
-
 void Point::setX(float x)
 {
 	this->_x = x;
@@ -32,7 +22,13 @@ void Point::setY(float y)
 	this->_y = y;
 }
 
-float Point::euclidianDistance(Point &other)
+float Point::euclidianDistance(const Point &other) const
 {
 	return hypot(this->getX() - other.getX(), this->getY() - other.getY());
+}
+
+void Point::scale(float scaleValue)
+{
+	this->_x *= scaleValue;
+	this->_y *= scaleValue;
 }

@@ -56,7 +56,7 @@ void Ball::moveRight()
 
 void Ball::collisionCheck(std::vector<Segment> barriers)
 {
-	this->handleBorderCollision();
+	// this->handleBorderCollision();
 	for (auto segment : barriers)
 	{
 

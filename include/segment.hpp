@@ -16,8 +16,23 @@ public:
 	void draw(Graphics &graphics);
 	void update();
 
-	Point getFirst() { return this->_first; }
-	Point getSecond() { return this->_second; }
+	Point getFirst() const { return Point(this->_first); }
+	Point getSecond() const { return Point(this->_second); }
+
+	void scale(float scaleValue);
+
+	bool operator < (const Segment other) const 
+	{
+		return this->_first == other.getFirst() ? 
+			this->_second < other.getSecond() : 
+			this->_first < other.getFirst();
+	}
+
+	bool operator == (Segment other)
+	{
+		return this->_first == other.getFirst() and
+			this->_second == other.getSecond();
+	}
 
 private:
 

@@ -1,6 +1,8 @@
 #ifndef POINT_HPP
 #define POINT_HPP
 
+#include "util.hpp"
+
 class Point
 {
 public:
@@ -8,19 +10,27 @@ public:
 	Point();
 	~Point();
 
-	Point(float x, float y);
+	Point(const float x, const float y);
 
-	float getX();
-	float getY();
-	void setX(float x);
-	void setY(float y);
+	float getX() const { return this->_x; }
+	float getY() const { return this->_y; }
+	void setX(const float x);
+	void setY(const float y);
 
-	float euclidianDistance(Point &other);
+	float euclidianDistance(const Point &other) const;
 
-	Point operator * (float value)
+	void scale(const float scaleValue);
+
+	bool operator < (const Point other) const
 	{
-		_x *= value;
-		_y *= value;
+		return Util::fequals(this->_x, other.getX()) ? 
+			this->_y < other.getY() :
+			this->_x < other.getX() ;
+	}
+
+	bool operator == (const Point other) const
+	{
+		return Util::fequals(this->_x, other.getX()) and Util::fequals(this->_y, other.getY());
 	}
 
 private:
