@@ -26,10 +26,15 @@ public:
 	 */
 	static const bool fequals(float a, float b);
 
+	/*
+		returns the scaled value scaled by sprite scale
+	 */
 	static const int applyScale(int a);
-
 	static const float applyScale(float a);
 
+	/*
+		Permutes a list randomly
+	 */
 	template <typename T>
 	static void permute(std::vector<T> &vector);
 };

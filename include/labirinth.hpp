@@ -13,17 +13,31 @@ public:
 	Labirinth();
 	~Labirinth();
 
+	/*
+		Empties all data and generates a brand new labirinth
+	 */
 	void generateLabirinth();
 
+	/*
+		Draws labirinth to screen
+	 */
 	void draw(Graphics &graphics);
-	void update();
 
+	/*
+		Returns a vector of segments containing all labirinth's segments
+	 */
 	std::vector<Segment> getBarriers() const;
 
+	/*
+		Returns true if point passed is a victory condition
+	 */
 	bool victory(const Point playerPosition) const;
 
 private:
 
+	/*
+		Grid vertical size and horizontal size
+	 */
 	int _vSize;
 	int _hSize;
 
@@ -40,7 +54,6 @@ private:
 	const bool validatePosition(const int x, const int y);
 
 	// Cardinal directions
-
 	const int _dx[4] = {1, -1, 0, 0};
 	const int _dy[4] =  {0, 0, 1, -1};
 };

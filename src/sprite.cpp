@@ -31,8 +31,3 @@ void Sprite::draw(Graphics &graphics, int x, int y)
 	SDL_Rect destination = { x, y, Util::applyScale(this->_sourceRect.w), Util::applyScale(this->_sourceRect.h) };
 	graphics.blitSurface(this->_spriteSheet, &this->_sourceRect, &destination);
 }
-
-void Sprite::update()
-{
-
-}

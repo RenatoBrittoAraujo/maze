@@ -31,17 +31,10 @@ void Labirinth::draw(Graphics &graphics)
 	}
 }
 
-void Labirinth::update()
-{
-
-}
-
 std::vector<Segment> Labirinth::getBarriers() const
 {
 	return this->_barriers;
 }
-
-#include <iostream>
 
 void Labirinth::generateLabirinth()
 {
@@ -67,7 +60,7 @@ void Labirinth::generateLabirinth()
 	std::vector<bool> visited(_vSize * _hSize + 1, false);
 	std::vector<Segment> toDelete;
 
-	dfs(0, visited, toDelete);
+	dfs(_hSize * (_vSize), visited, toDelete);
 
 	sort(toDelete.begin(), toDelete.end());
 	int barriersIndex = 0;

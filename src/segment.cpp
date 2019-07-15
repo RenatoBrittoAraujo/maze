@@ -29,11 +29,6 @@ void Segment::draw(Graphics &graphics)
 		_second.getY());
 }
 
-void Segment::update()
-{
-
-}
-
 void Segment::scale(float scaleValue)
 {
 	this->_first.scale(scaleValue);

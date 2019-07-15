@@ -17,7 +17,9 @@ public:
 
 	Sprite(Graphics &graphics, const std::string &path, int sourceX, int sourceY, int sourceWidth, int sourceHeight);
 
-	void update();
+	/*
+		Renders the sprite to screen 
+	 */
 	void draw(Graphics &graphics, int x, int y);
 
 protected:

@@ -53,6 +53,8 @@ bool Game::init(const char *title)
 
 void Game::handleUserInput()
 {
+	this->_input.beginNewFrame();
+
 	if (SDL_PollEvent(&this->_event))
 	{
 		if (this->_event.type == SDL_QUIT)
@@ -92,7 +94,7 @@ void Game::handleUserInput()
 		this->_player->moveDown();
 	}
 
-	if (this->_input.isKeyHeld(SDL_SCANCODE_R))
+	if (this->_input.wasKeyPressed(SDL_SCANCODE_R))
 	{
 		_backgroundColor = Color(
 			Util::randInt(180, 255),

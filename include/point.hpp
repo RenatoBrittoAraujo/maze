@@ -19,6 +19,9 @@ public:
 
 	float euclidianDistance(const Point &other) const;
 
+	/*
+		Multiplies point's x and y by passed value
+	 */
 	void scale(const float scaleValue);
 
 	bool operator < (const Point other) const

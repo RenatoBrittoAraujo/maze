@@ -53,6 +53,9 @@ public:
 
 private:
 
+	/*
+		Configure starting game conditions such as spawn point and labirinth
+	 */
 	void startGame();
 
 	/*

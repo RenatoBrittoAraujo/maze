@@ -13,12 +13,17 @@ public:
 
 	Segment(Point first, Point second);
 
+	/*
+		Draws segment to screen
+	 */
 	void draw(Graphics &graphics);
-	void update();
 
 	Point getFirst() const { return Point(this->_first); }
 	Point getSecond() const { return Point(this->_second); }
 
+	/*
+		Multiplies x and y of the points by scaleValue
+	 */
 	void scale(float scaleValue);
 
 	bool operator < (const Segment other) const 
