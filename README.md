@@ -1,4 +1,4 @@
-# Cleber e seu labirinto perdido
+# Sdlabirinth
 
 A game about a little ball called Cleber and the maze it wants to escape.
 
